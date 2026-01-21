@@ -91,28 +91,30 @@
     <div class="resultado" id="resultado"></div>
   </div>
 
-  <script>
-    function calcular() {
-      const quantidade = Number(document.getElementById("quantidade").value);
-      const potencia = Number(document.getElementById("potencia").value);
+ <script>
+  function calcular() {
+    const quantidade = Number(document.getElementById("quantidade").value);
+    const potencia = Number(document.getElementById("potencia").value);
 
-      if (quantidade <= 0 || potencia <= 0) {
-        document.getElementById("resultado").innerHTML =
-          "<p style='color:red;'>Preencha todos os campos corretamente.</p>";
-        return;
-      }
-
-      const potenciaInstalada = quantidade * potencia;
-      const geracaoMensal = (potenciaInstalada * 130) / 1000;
-      const geracaoDiaria = geracaoMensal / 30;
-
-      document.getElementById("resultado").innerHTML = `
-        <p><strong>Potência instalada:</strong> ${potenciaInstalada} W</p>
-        <p><strong>Geração média mensal:</strong> ${geracaoMensal.toFixed(2)} kWh</p>
-        <p><strong>Geração média diária:</strong> ${geracaoDiaria.toFixed(2)} kWh</p>
-      `;
+    if (quantidade <= 0 || potencia <= 0) {
+      document.getElementById("resultado").innerHTML =
+        "<p style='color:red;'>Preencha todos os campos corretamente.</p>";
+      return;
     }
-  </script>
+
+    const potenciaInstaladaWp = quantidade * potencia;
+    const potenciaInstaladakWp = potenciaInstaladaWp / 1000;
+    const geracaoMensal = potenciaInstaladakWp * 130;
+    const geracaoDiaria = geracaoMensal / 30;
+
+    document.getElementById("resultado").innerHTML = `
+      <p><strong>Potência instalada:</strong> ${potenciaInstaladakWp.toFixed(2)} kWp</p>
+      <p><strong>Geração média mensal:</strong> ${geracaoMensal.toFixed(2)} kWh</p>
+      <p><strong>Geração média diária:</strong> ${geracaoDiaria.toFixed(2)} kWh</p>
+    `;
+  }
+</script>
+
 
 </body>
 </html>
