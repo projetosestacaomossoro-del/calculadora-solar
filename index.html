@@ -1,0 +1,118 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculadora Solar</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f5f5f5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+    }
+
+    .calculadora {
+      background: #ffffff;
+      padding: 20px;
+      border-radius: 10px;
+      width: 100%;
+      max-width: 380px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 15px;
+      color: #2e7d32;
+    }
+
+    label {
+      font-weight: bold;
+      display: block;
+      margin-top: 10px;
+    }
+
+    input {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      margin-top: 15px;
+      width: 100%;
+      padding: 10px;
+      background: #2e7d32;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #256628;
+    }
+
+    .resultado {
+      margin-top: 15px;
+      background: #f1f8f4;
+      padding: 10px;
+      border-radius: 5px;
+    }
+
+    .resultado p {
+      margin: 5px 0;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="calculadora">
+    <h2>Calculadora Solar</h2>
+
+    <label>Quantidade de placas</label>
+    <input type="number" id="quantidade" placeholder="Ex: 10">
+
+    <label>Potência da placa (W)</label>
+    <input type="number" id="potencia" placeholder="Ex: 550">
+
+    <button onclick="calcular()">Calcular</button>
+
+    <div class="resultado" id="resultado"></div>
+  </div>
+
+  <script>
+    function calcular() {
+      const quantidade = Number(document.getElementById("quantidade").value);
+      const potencia = Number(document.getElementById("potencia").value);
+
+      if (quantidade <= 0 || potencia <= 0) {
+        document.getElementById("resultado").innerHTML =
+          "<p style='color:red;'>Preencha todos os campos corretamente.</p>";
+        return;
+      }
+
+      const potenciaInstalada = quantidade * potencia;
+      const geracaoMensal = (potenciaInstalada * 130) / 1000;
+      const geracaoDiaria = geracaoMensal / 30;
+
+      document.getElementById("resultado").innerHTML = `
+        <p><strong>Potência instalada:</strong> ${potenciaInstalada} W</p>
+        <p><strong>Geração média mensal:</strong> ${geracaoMensal.toFixed(2)} kWh</p>
+        <p><strong>Geração média diária:</strong> ${geracaoDiaria.toFixed(2)} kWh</p>
+      `;
+    }
+  </script>
+
+</body>
+</html>
